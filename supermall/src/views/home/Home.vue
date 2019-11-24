@@ -70,7 +70,8 @@
                 currentType: 'pop',
                 isShowBackTop: false,
                 tabOffsetTop: 0,
-                isTabFixed:false
+                isTabFixed:false,
+                saveY:0
             }
         },
         computed: {
@@ -78,10 +79,19 @@
                 return this.goods[this.currentType].list
             }
         },
+        actived(){
+            this.$refs.scroll.scrollTo(0, this.saveY,0)
+            this.$refs.scroll.refresh()
+        },
+        deactivated(){
+            console.log(this.saveY);
+            this.saveY=-this.$refs.scroll.getScrollY()
+        },
         created() {
             //1.请求多个数据
             this.getHomeMultidata()
             //2.请求商品数据
+
             this.getHomeGoods('pop')
             this.getHomeGoods('new')
             this.getHomeGoods('sell')
