@@ -71,7 +71,8 @@
                 isShowBackTop: false,
                 tabOffsetTop: 0,
                 isTabFixed:false,
-                saveY:0
+                saveY:0,
+                // itemImgListener:null
             }
         },
         computed: {
@@ -84,8 +85,11 @@
             this.$refs.scroll.refresh()
         },
         deactivated(){
-            console.log(this.saveY);
-            this.saveY=-this.$refs.scroll.getScrollY()
+            // console.log(this.saveY);
+            //1.保存Y值
+            this.saveY=-(this.$refs.scroll.getScrollY())
+            //2.取消全局事件的监听
+            // this.$bus.$off()
         },
         created() {
             //1.请求多个数据
